@@ -6,6 +6,7 @@ var pX = innerWidth/30
 var pY = innerHeight/2
 var pMove = null
 
+
 function pDesign() {
     player.style.width = `${pWidth}px`
     player.style.height = `${pWidth}px`
@@ -15,32 +16,34 @@ pDesign()
 
 function pPosition() {
     player.style.position = `fixed`
-
-    function pHorizontalMove() {
-        player.style.left = `${pX}px`
-        switch (pMove) {
-            case `right`:
-                pX = pX + 1
-                break;
-            case `left`:
-                pX = pX - 1
-                break;
-        }
-    } 
+    player.style.left = `${pX}px`
+    player.style.bottom = `${pY}px`
 
     function pDownMove() {
-        player.style.bottom = `${pY}px`
         switch (pY) {
-            case pY = sY + sHeight:
+            case sY:
                 pY = pY
                 break;
             default:
                 pY = pY - 1
                 break;
         }
+        player.style.bottom = `${pY}px`
     }
-    setInterval(pDownMove, 100)
-    setInterval(pHorizontalMove, 1)   
+    setInterval(pDownMove, 5)
+    
+    function pHorizontalMove() {
+        switch (pMove) {
+            case `right`:
+                pX += 1
+                break;
+            case `left`:
+                pX -= 1
+                break;
+        }
+        player.style.left = `${pX}px`
+    }
+    setInterval(pHorizontalMove, 1)    
 
     document.addEventListener(`keydown`, function(e) {
         switch (e.key) {
@@ -53,7 +56,7 @@ function pPosition() {
         }
     })
     
-    document.addEventListener(`keyup`, function(e) {
+    document.addEventListener(`keyup`, function() {
         pMove = null
     })
 }

@@ -5,6 +5,8 @@ var sWidth = innerWidth/1.05
 var sHeight = innerHeight/15
 var sX = innerWidth/45
 var sY = innerHeight/5
+var sTop = sY + sHeight
+
 
 function sDesign() {
     platform.style.width = `${sWidth}px`
