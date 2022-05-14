@@ -1,56 +1,60 @@
 const player = document.createElement('div')
 document.body.append(player)
 
-var width = innerWidth/15
-var x = innerWidth/30
-var y = innerHeight/3
-var move = null
+var pWidth = innerWidth/17
+var pX = innerWidth/30
+var pY = innerHeight/2
+var pMove = null
 
-function pLook() {
-    player.style.width = `${width}px`
-    player.style.height = `${width}px`
+function pDesign() {
+    player.style.width = `${pWidth}px`
+    player.style.height = `${pWidth}px`
     player.style.backgroundColor = `#000`
-
 }
-pLook()
+pDesign()
 
 function pPosition() {
     player.style.position = `fixed`
 
-    switch (x) {
-        case 0:
-        case innerWidth-width:
-            x = x 
-            break;
-    }
-
-    function pMove() {    
-        switch (move) {
+    function pHorizontalMove() {
+        player.style.left = `${pX}px`
+        switch (pMove) {
             case `right`:
-                x = x + 1
+                pX = pX + 1
                 break;
             case `left`:
-                x = x - 1
+                pX = pX - 1
                 break;
         }
-        player.style.left = `${x}px`
-        player.style.bottom = `${y}px`
-    }
-    setInterval(pMove, 1)
+    } 
 
-    document.addEventListener('keydown', function(e) {
+    function pDownMove() {
+        player.style.bottom = `${pY}px`
+        switch (pY) {
+            case pY = sY + sHeight:
+                pY = pY
+                break;
+            default:
+                pY = pY - 1
+                break;
+        }
+    }
+    setInterval(pDownMove, 100)
+    setInterval(pHorizontalMove, 1)   
+
+    document.addEventListener(`keydown`, function(e) {
         switch (e.key) {
             case `ArrowRight`:
-                move = 'right'
+                pMove = `right`
                 break;
             case `ArrowLeft`:
-                move = `left`
+                pMove = `left`
                 break;
         }
     })
     
-    document.addEventListener('keyup', function(e) {
-        move = null
+    document.addEventListener(`keyup`, function(e) {
+        pMove = null
     })
 }
 pPosition()
