@@ -1,9 +1,9 @@
 const player = document.createElement('div')
 playArea.append(player)
 
-var pWidth = Math.floor(innerWidth/17)
-var pX = Math.floor(innerWidth/30)
-var pY = Math.floor(innerHeight/2)
+var pWidth = Math.floor(aWidth/20)
+var pX = Math.floor(aWidth/30)
+var pY = Math.floor(aHeight/2)
 var pMove = null
 
 
@@ -57,7 +57,7 @@ function pPosition() {
         }
         player.style.left = `${pX}px`
     }
-    setInterval(pHorizontalMove, 10)    
+    setInterval(pHorizontalMove, 1)    
 
     document.addEventListener(`keydown`, function(e) {
         switch (e.key) {
