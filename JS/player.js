@@ -1,5 +1,5 @@
 const player = document.createElement('div')
-document.body.append(player)
+playArea.append(player)
 
 var pWidth = innerWidth/17
 var pX = innerWidth/30
@@ -21,16 +21,16 @@ function pPosition() {
 
     function pDownMove() {
         switch (pY) {
-            case sY:
+            case sY + sHeight:
                 pY = pY
                 break;
             default:
-                pY = pY - 1
+                pY -= 1
                 break;
         }
         player.style.bottom = `${pY}px`
     }
-    setInterval(pDownMove, 5)
+    setInterval(pDownMove, 1)
     
     function pHorizontalMove() {
         switch (pMove) {
