@@ -1,9 +1,16 @@
 
 const playArea = document.createElement(`div`)
-playArea.style.width = `${Math.floor(innerWidth/1.02)}px`
-playArea.style.height = `${Math.floor(innerHeight/1.02)}px`
+const aWidth = Math.floor(innerWidth/1.02)
+const aHeight = Math.floor(innerHeight/1.02)
+const aLeft = Math.floor(innerWidth/95)
+const aRight = Math.floor(aLeft + aWidth)
+const aBottom = Math.floor(innerHeight/95)
+
+playArea.style.width = `${aWidth}px`
+playArea.style.height = `${aHeight}px`
 playArea.style.position = `fixed`
-playArea.style.left = `${Math.floor(innerWidth/95)}px`
+playArea.style.left = `${aLeft}px`
+playArea.style.bottom = `${aBottom}px`
 playArea.style.backgroundColor = `#0004`
 document.body.append(playArea)
 

@@ -1,18 +1,18 @@
 const player = document.createElement('div')
 playArea.append(player)
 
-var pWidth = innerWidth/17
-var pX = innerWidth/30
-var pY = innerHeight/2
+var pWidth = Math.floor(innerWidth/17)
+var pX = Math.floor(innerWidth/30)
+var pY = Math.floor(innerHeight/2)
 var pMove = null
 
 
-function pDesign() {
-    player.style.width = `${pWidth}px`
-    player.style.height = `${pWidth}px`
-    player.style.backgroundColor = `#000`
+function pDesign(w, h, c) {
+    player.style.width = w
+    player.style.height = h
+    player.style.backgroundColor = c
 }
-pDesign()
+pDesign(`${pWidth}px`, `${pWidth}px`, `#000`)
 
 function pPosition() {
     player.style.position = `fixed`
@@ -35,15 +35,29 @@ function pPosition() {
     function pHorizontalMove() {
         switch (pMove) {
             case `right`:
-                pX += 1
+                switch (pX + pWidth) {
+                    case aRight:
+                        pX = pX
+                        break;
+                    default:
+                        pX += 1
+                        break;
+                }
                 break;
             case `left`:
-                pX -= 1
+                switch (pX) {
+                    case aLeft:
+                        pX = pX
+                        break;
+                    default:
+                        pX -= 1
+                        break;
+                }
                 break;
         }
         player.style.left = `${pX}px`
     }
-    setInterval(pHorizontalMove, 1)    
+    setInterval(pHorizontalMove, 10)    
 
     document.addEventListener(`keydown`, function(e) {
         switch (e.key) {
