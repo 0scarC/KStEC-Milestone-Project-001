@@ -15,15 +15,22 @@ playArea.style.backgroundColor = `#0004`
 document.body.append(playArea)
 
 //Stage Platforms
-var platform = document.createElement(`div`)
-playArea.append(platform)
 
 var sWidth
 var sHeight
 var sX
 var sY
 
+var sLeft = []
+var sRight = []
+var sUp = []
+var sDown = []
+var sCounter = 0
+
 function newPlatform(w, h, c, x, y) {
+    var platform = document.createElement(`div`)
+    playArea.append(platform)
+
     function sDesign() {
         sWidth = Math.floor(w)
         sHeight = Math.floor(h)
@@ -40,9 +47,16 @@ function newPlatform(w, h, c, x, y) {
         platform.style.position = `fixed`
         platform.style.left = `${sX}px`
         platform.style.bottom = `${sY}px`
-        return sX, sY
     }
     sPosition()
-    
+
+    sLeft.push(sX)
+    sRight.push(sX + sWidth)
+    sUp.push(sY + sHeight)
+    sDown.push(sY)
+    sCounter++
 }
-newPlatform(innerWidth/1.05, innerHeight/15, `#ff0`, innerWidth/45, innerHeight/5)
+
+
+var platFloor = newPlatform(aWidth, aHeight/15, `#f00`, aLeft, aHeight/5)
+var plat01 = newPlatform(aWidth/2, aHeight/15, `#ff0`, aWidth/4, aHeight/2)

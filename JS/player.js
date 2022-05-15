@@ -2,10 +2,14 @@ const player = document.createElement('div')
 playArea.append(player)
 
 var pWidth = Math.floor(aWidth/20)
-var pX = Math.floor(aWidth/30)
-var pY = Math.floor(aHeight/2)
+var pX = Math.floor(aWidth/2)
+var pY = Math.floor(aHeight/1.25)
 var pMove = null
 
+console.log(`Left: ${sLeft}`)
+console.log(`Right: ${sRight}`)
+console.log(`Up: ${sUp}`)
+console.log(`Down${sDown}`)
 
 function pDesign(w, h, c) {
     player.style.width = w
@@ -18,11 +22,30 @@ function pPosition() {
     player.style.position = `fixed`
     player.style.left = `${pX}px`
     player.style.bottom = `${pY}px`
-
+    
     function pDownMove() {
         switch (pY) {
-            case sY + sHeight:
-                pY = pY
+            case sUp[0]:
+                switch (pX) {
+                    case sLeft[0] - pWidth:
+                    case sRight[0]:
+                        pY -= 1 
+                        break;
+                    default:
+                        pY = pY
+                        break;
+                }
+                break;
+            case sUp[1]:
+                switch (pX) {
+                    case sLeft[1] - pWidth:
+                        case sRight[1]:
+                        pY -= 1 
+                        break;
+                    default:
+                        pY = pY
+                        break;
+                }
                 break;
             default:
                 pY -= 1
@@ -37,6 +60,8 @@ function pPosition() {
             case `right`:
                 switch (pX + pWidth) {
                     case aRight:
+                    case sLeft[0]:
+                    case sLeft[1]:
                         pX = pX
                         break;
                     default:
@@ -47,6 +72,8 @@ function pPosition() {
             case `left`:
                 switch (pX) {
                     case aLeft:
+                    case sRight[0]:
+                    case sRight[1]:
                         pX = pX
                         break;
                     default:
