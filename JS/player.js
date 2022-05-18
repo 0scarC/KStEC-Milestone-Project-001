@@ -11,6 +11,7 @@ console.log(`Right: ${sRight}`)
 console.log(`Up: ${sUp}`)
 console.log(`Down${sDown}`)
 
+
 function pDesign(w, h, c) {
     player.style.width = w
     player.style.height = h
@@ -60,8 +61,6 @@ function pPosition() {
             case `right`:
                 switch (pX + pWidth) {
                     case aRight:
-                    case sLeft[0]:
-                    case sLeft[1]:
                         pX = pX
                         break;
                     default:
@@ -72,8 +71,6 @@ function pPosition() {
             case `left`:
                 switch (pX) {
                     case aLeft:
-                    case sRight[0]:
-                    case sRight[1]:
                         pX = pX
                         break;
                     default:
@@ -97,8 +94,15 @@ function pPosition() {
         }
     })
     
-    document.addEventListener(`keyup`, function() {
-        pMove = null
+    document.addEventListener(`keyup`, function(e) {
+        switch (e.key) {
+            case `ArrowRight`:
+                pMove = null
+                break;
+            case `ArrowLeft`:
+                pMove = null
+                break;
+        }
     })
 }
 pPosition()

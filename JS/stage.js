@@ -21,11 +21,10 @@ var sHeight
 var sX
 var sY
 
-var sLeft = []
-var sRight = []
-var sUp = []
-var sDown = []
-var sCounter = 0
+const sLeft = []
+const sRight = []
+const sUp = []
+const sDown = []
 
 function newPlatform(w, h, c, x, y) {
     var platform = document.createElement(`div`)
@@ -54,7 +53,6 @@ function newPlatform(w, h, c, x, y) {
     sRight.push(sX + sWidth)
     sUp.push(sY + sHeight)
     sDown.push(sY)
-    sCounter++
 }
 
 
