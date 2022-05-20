@@ -1,4 +1,4 @@
-// const player = document.createElement('div')
+// var player = document.createElement('div')
 // playArea.append(player)
 
 // var pWidth = Math.floor(aWidth/20)
@@ -6,17 +6,11 @@
 // var pY = Math.floor(aHeight/1.25)
 // var pMove = null
 
-// console.log(`Left: ${sLeft}`)
-// console.log(`Right: ${sRight}`)
-// console.log(`Up: ${sUp}`)
-// console.log(`Down: ${sDown}`)
-
-
 // function pDesign(w, h, c) {
 //     player.style.width = w
 //     player.style.height = h
 //     player.style.backgroundColor = c
-// }
+// }    
 // pDesign(`${pWidth}px`, `${pWidth}px`, `#000`)
 
 // function pPosition() {
@@ -60,29 +54,9 @@
 //         switch (pMove) {
 //             case `right`:
 //                 switch (pX + pWidth) {
-//                     case aRight:
+//                     case aX + aWidth:
 //                         pX = pX
 //                         break;
-//                     case sLeft[0]:
-//                         pX = pX
-//                         break;
-//                     case sLeft[1]:
-//                         switch (pX + pWidth >= sLeft) {
-//                             case true:
-//                                 // switch (pY < sUp[1] && pY + pWidth > sDown[1]) {
-//                                 //     case true:
-//                                 //         console.log(`${pY} and ${sUp[1]}`)
-//                                 //         console.log(`${pY + pWidth} and ${sDown[1]}`)
-//                                 //         pX = pX
-//                                 //         break;
-//                                 //     default:
-//                                 //         pX += 1
-//                                 //         break;
-//                                 //     }
-//                                 // break;
-//                                 pX = pX
-//                                 break;
-//                         }
 //                     default:
 //                         pX += 1
 //                         break;
@@ -90,7 +64,7 @@
 //                 break;
 //             case `left`:
 //                 switch (pX) {
-//                     case aLeft:
+//                     case aX:
 //                         pX = pX
 //                         break;
 //                     default:
