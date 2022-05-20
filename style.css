@@ -4,9 +4,13 @@ body {
     background-color: #00aaa3;
 }
 
+ul {
+    list-style: none;
+    padding-inline-start: 0;
+}
+
 .goal {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 5vw;
 }

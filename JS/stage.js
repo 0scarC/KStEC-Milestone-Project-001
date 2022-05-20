@@ -1,21 +1,22 @@
 //Design
-function design(n, w, h, c) {
-    n.style.width = `${w}px`
-    n.style.height = `${h}px`
-    n.style.backgroundColor = c
+function design(e, w, h, c, n) {
+    e.style.width = `${w}px`
+    e.style.height = `${h}px`
+    e.style.backgroundColor = c
+    e.className = n
 }
 
 //Position
-function position(n, x, y) {
-    n.style.position = `fixed`
-    n.style.left = `${x}px`
-    n.style.bottom = `${y}px`
+function position(e, x, y) {
+    e.style.position = `fixed`
+    e.style.left = `${x}px`
+    e.style.bottom = `${y}px`
 }
 
 //Text
-function text(n, t, c) {
-    n.innerHTML = t
-    n.style.color = c
+function text(e, t, c) {
+    e.innerHTML = t
+    e.style.color = c
 }
 
 //Stage Play Area
@@ -28,7 +29,7 @@ const aX = Math.floor(innerWidth/95)
 const aY = Math.floor(innerHeight/95)
 
 function stageArea(c) {
-    design(playArea, aWidth, aHeight, c)
+    design(playArea, aWidth, aHeight, c, `playArea`)
     position(playArea, aX, aY)
     document.body.append(playArea)
 }
@@ -45,7 +46,7 @@ const sRight = []
 const sUp = []
 const sDown = []
 
-function newPlatform(w, h, c, x, y, v) {
+function newPlatform(w, h, c, x, y) {
     var platform = document.createElement(`div`)
     
     function sDesign() {
@@ -54,7 +55,6 @@ function newPlatform(w, h, c, x, y, v) {
         platform.style.width = `${sWidth}px`
         platform.style.height = `${sHeight}px`
         platform.style.backgroundColor = c
-        platform.className = v
     }
     sDesign()
     
@@ -77,14 +77,13 @@ function newPlatform(w, h, c, x, y, v) {
 
 //Menus
 
-//Complete Menu
+//Pause Menu
 var pauseArea
 
 function pause() {
     pauseArea = document.createElement(`div`)
-    pauseArea.className = `pause`
     
-    design(pauseArea, aWidth, aHeight, `#0006`)
+    design(pauseArea, aWidth, aHeight, `#0006`, `pause`)
     position(pauseArea, aX, aY)
     
     const pauseMenu = document.createElement(`div`)
@@ -98,7 +97,7 @@ function pause() {
     position(pauseMenu, aWidth/3.84, aHeight/3)
     text(pauseTitle, `<strong>PAUSED</strong>`, `#fff`)
     text(pauseListItem3, `<a href="../index.html">Continue</a>`)
-    text(pauseListItem2, `<a href="../index.html">Restart</a>`)
+    text(pauseListItem2, `<a href="../index.html">Restart</ a>`)
     text(pauseListItem1, `<a href="../index.html">Stage Selection</a>`)
 
     pauseList.append(pauseListItem1)
@@ -117,9 +116,9 @@ var end
 
 function stage01() {
     stageArea(`#fff`)
-    newPlatform(aWidth, aHeight/15, `#f008`, aX, aHeight/25,``)
-    start = newPlatform(aWidth/4, aHeight/15, `#ff0`, aX * 2.25, aHeight/25, `goal`)
-    end = newPlatform(aWidth/4, aHeight/15, `#f0f`, aWidth/4 * 3 , aHeight/25, `goal`)
+    newPlatform(aWidth, aHeight/15, `#f008`, aX, aHeight/25)
+    start = newPlatform(aWidth/4, aHeight/15, `#ff0`, aX * 2.25, aHeight/25)
+    end = newPlatform(aWidth/4, aHeight/15, `#f0f`, aWidth/4 * 3 , aHeight/25)
 }
 
 function stage02() {
