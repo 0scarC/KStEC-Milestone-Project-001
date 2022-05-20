@@ -146,4 +146,5 @@ function stageTimer() {
         //     break;
     }
 }
-setInterval(stageTimer, 1000)
+// setInterval(stageTimer, 1000)
+stage01()
