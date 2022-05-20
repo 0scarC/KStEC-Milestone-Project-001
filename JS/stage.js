@@ -14,8 +14,9 @@ function position(e, x, y) {
 }
 
 //Text
-function text(e, t, c) {
+function text(e, t, s, c) {
     e.innerHTML = t
+    e.style.fontSize = `${s}px`
     e.style.color = c
 }
 
@@ -93,12 +94,12 @@ function pause() {
     const pauseListItem2 = document.createElement(`li`)
     const pauseListItem3 = document.createElement(`li`)
     
-    design(pauseMenu, aWidth/2, aHeight/2, `#000`)
+    design(pauseMenu, aWidth/2, aHeight/2)
     position(pauseMenu, aWidth/3.84, aHeight/3)
-    text(pauseTitle, `<strong>PAUSED</strong>`, `#fff`)
-    text(pauseListItem3, `<a href="../index.html">Continue</a>`)
-    text(pauseListItem2, `<a href="../index.html">Restart</ a>`)
-    text(pauseListItem1, `<a href="../index.html">Stage Selection</a>`)
+    text(pauseTitle, `<strong>PAUSED</strong>`, aHeight/15)
+    text(pauseListItem1, `<a href="../index.html">Continue</a>`, aHeight/20)
+    text(pauseListItem2, `<a href="../index.html">Restart</ a>`, aHeight/20)
+    text(pauseListItem3, `<a href="../index.html">Stage Selection</a>`, aHeight/20)
 
     pauseList.append(pauseListItem1)
     pauseList.append(pauseListItem2)
@@ -108,7 +109,6 @@ function pause() {
     pauseArea.append(pauseMenu)
     document.body.append(pauseArea)
 }
-
 
 //Stages
 var start

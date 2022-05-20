@@ -9,8 +9,20 @@ ul {
     padding-inline-start: 0;
 }
 
-.goal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/*Pause Menu*/
+.pause div {
+    text-align: center;
+    border: 2px solid #fff;
+    background-color: #000;
+    color: #fff;
+}
+
+.pause a,
+.pause a:visited {
+    text-decoration: none;
+    color: #fff;
+}
+
+.pause a:hover {
+    color: #ff0
 }
