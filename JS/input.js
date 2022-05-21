@@ -1,5 +1,6 @@
 
 var l = 0
+var m = 0
 var r = 0
 
 //Player Movement
@@ -64,10 +65,13 @@ document.addEventListener(`keydown`, function(e) {
         case `KeyP`:
             switch (p) {
                 case 1:
+                    pDown = `fall`
+                    pY += 1
                     pauseArea.remove()
                     p = 0
                     break;
                 default:
+                    pDown = null
                     pause()
                     p = 1
                     switch (c) {

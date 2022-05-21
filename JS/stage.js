@@ -1,3 +1,8 @@
+var c = 0
+var p = 0
+var i = 0
+var s = 0
+
 //Design and Position
 function design(e, w, h, c, tC, x, y, n) {
     e.style.width = `${w}px`
@@ -11,26 +16,29 @@ function design(e, w, h, c, tC, x, y, n) {
 }
 
 //Text
-function text(e, t, s) {
+function text(m, e, t, s, l) {
     e.innerHTML = t
     e.style.fontSize = `${s}px`
+    e.style.paddingTop = `${l}px`
+    m.append(e)
 }
 
 //Stage Play Area
-var playArea = document.createElement(`div`)
-var c = 0
-var p = 0
-var i = 0
+const playArea = document.createElement(`div`)
 
 const aWidth = Math.floor(innerWidth/1.02)
 const aHeight = Math.floor(innerHeight/1.02)
 const aX = Math.floor(innerWidth/95)
 const aY = Math.floor(innerHeight/95)
 
-function stageArea(c) {
-    design(playArea, aWidth, aHeight, c, ``, aX, aY, `playArea`)
+var sT1 = document.createElement(`p`)
+var sT2 = document.createElement(`p`)
+var sT3 = document.createElement(`p`)
+var sT4 = document.createElement(`p`)
+
+function stageArea() {
+    design(playArea, aWidth, aHeight, `#fff`, `#858585`, aX, aY, `playArea`)
     document.body.append(playArea)
-    c = 0
 }
 
 //Stage Platforms
@@ -46,7 +54,7 @@ const sDown = []
 const sI = []
 
 function newPlatform(w, h, c, x, y) {
-    var platform = document.createElement(`div`)
+    const platform = document.createElement(`div`)
 
     function sDesign() {
         sWidth = Math.floor(w)
@@ -81,82 +89,52 @@ var cMenu = document.createElement(`div`)
 var cTitle = document.createElement(`h3`)
 var cList = document.createElement(`ul`)
 var cL1 = document.createElement(`li`)
-var cL2 = document.createElement(`li`)
-var cL3 = document.createElement(`li`)
-var cL4 = document.createElement(`li`)
 
 var pauseArea = document.createElement(`div`)
 var pauseMenu = document.createElement(`div`)
 var pauseTitle = document.createElement(`h3`)
 var pauseList = document.createElement(`ul`)
 var pauseL1 = document.createElement(`li`)
-var pauseL2 = document.createElement(`li`)
-var pauseL3 = document.createElement(`li`)
-var pauseL4 = document.createElement(`li`)
 
-function menu(e, c, menu, title, t1, list, li1, i1, li2, li3, li4) {
+function menu(e, c, m, title, t1, list, li1, i1) {
     design(e, aWidth, aHeight, c, ``, aX, aY, `menu`)
     
-    design(menu, aWidth/2, aHeight/2, `#000`, `fff`, aWidth/3.84, aHeight/3)
-    text(title, t1, aHeight/20)
-    text(li1, i1, aHeight/25)
-    text(li2, `<a href="../index.html">Retry</ a>`, aHeight/25)
-    text(li3, `<a href="../index.html">Stage Selection</a>`, aHeight/25)
-    text(li4, `<a href="../index.html">Main Menu</a>`, aHeight/25)
+    design(m, aWidth/2, aHeight/2, `#000`, `#fff`, aWidth/3.84, aHeight/3)
+    text(m, title, t1, aHeight/20)
+    text(m, li1, i1, aHeight/25)
 
     list.append(li1)
-    list.append(li2)
-    list.append(li3)
-    list.append(li4)
-    menu.append(title)
-    menu.append(list)
-    e.append(menu)
+    m.append(list)
+    e.append(m)
     document.body.append(e)
 }
 
 function complete() {
-    menu(cArea, `#ff06`, cMenu, cTitle, `<strong>STAGE<br>COMPLETE</strong>`, cList, cL1, `<a href="../index.html">Next Stage</a>`,cL2, cL3, cL4)
+    menu(cArea, `#ff06`, cMenu, cTitle, `<strong>STAGE<br>COMPLETE</strong>`, cList, cL1, `<a id="next" href="../index.html">Next Stage</a><br><a id="retry" href="../index.html">Retry</a><br><a id="ss" href="../index.html">Stage Selection</a><br><a id="mm" href="../index.html">Main Menu</a>`)
 }
 
 function pause() {
-    menu(pauseArea, `#0006`, pauseMenu, pauseTitle, `<br><strong>PAUSED</strong>`, pauseList, pauseL1, `<a href="../index.html">Continue</a>`,pauseL2, pauseL3, pauseL4)
+    menu(pauseArea, `#0006`, pauseMenu, pauseTitle, `<br><strong>PAUSED</strong>`, pauseList, pauseL1, `<a id="continue" href="../index.html">Continue</a><br><a id="retry" href="../index.html">Retry</a><br><a id="ss" href="../index.html">Stage Selection</a><br><a id="mm" href="../index.html">Main Menu</a>`)
 }
 
 //Stages
 var end
 
 function stage01() {
-    stageArea(`#fff`)
+    s = 1
+    stageArea()
+    text(playArea, sT1, `Move with the left (<--) and right (-->) arrow keys`, aHeight/25, aHeight/3)
     newPlatform(aWidth/1.25, aHeight/15, `#000`, aX, aHeight/25 + 1)
-    newPlatform(aWidth/4, aHeight/5, `#0f0`, aWidth * 0.375, aHeight/3)
-    end = newPlatform(aWidth/6, aHeight/15, `#f0f`, aWidth/6 * 5 , aHeight/25)
+    newPlatform(aWidth/6, aHeight/15, `#f0f`, aWidth/6 * 5.05 , aHeight/25)
 }
 
 function stage02() {
-    stageArea(`#fff`)
-    newPlatform(aWidth, aHeight/15, `#f00`, aX, aHeight/35)
+    s = 2
+    stageArea()
+    text(playArea, sT2, `Down you go`, aHeight/25)
+    newPlatform(aWidth/3, aHeight/15, `#f00`, aX, aHeight/1.25)
     newPlatform(aWidth/3, aHeight/15, `#00f`, aWidth/10, aHeight/3+1)
     newPlatform(aWidth/3, aHeight/15, `#00f`, aWidth/10 * 6, aHeight/3)
 }
 
 stage01()
-
-var t = 0
-function stageT() {
-    switch (t) {
-        case 0:
-        case 2:
-            playArea.remove()
-            player.remove()
-            stage01()
-            playArea.append(player)
-            t = 1
-            break;
-        case 1:
-            playArea.remove()
-            player.remove()
-            stage02()
-            playArea.append(player)
-            t = 2   
-    }
-}
