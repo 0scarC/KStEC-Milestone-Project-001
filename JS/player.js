@@ -1,102 +1,115 @@
-// var player = document.createElement('div')
-// playArea.append(player)
+var player = document.createElement('div')
 
-// var pWidth = Math.floor(aWidth/20)
-// var pX = Math.floor(aWidth/2)
-// var pY = Math.floor(aHeight/1.25)
-// var pMove = null
+var pWidth = Math.floor(aWidth/20)
+var pX = Math.floor(aWidth/2)
+var pY = Math.floor(aHeight/1.25)
+var pMove = null
+var pDown = `fall`
 
-// function pDesign(w, h, c) {
-//     player.style.width = w
-//     player.style.height = h
-//     player.style.backgroundColor = c
-// }    
-// pDesign(`${pWidth}px`, `${pWidth}px`, `#000`)
+function pDesign(w, h, c) {
+    player.style.width = w
+    player.style.height = h
+    player.style.backgroundColor = c
+}    
+pDesign(`${pWidth}px`, `${pWidth}px`, `#000`)
 
-// function pPosition() {
-//     player.style.position = `fixed`
-//     player.style.left = `${pX}px`
-//     player.style.bottom = `${pY}px`
+function pPosition() {
+    playArea.append(player)
+    player.style.position = `fixed`
+    player.style.left = `${pX}px`
+    player.style.bottom = `${pY}px`
     
-//     function pDownMove() {
-//         switch (pY) {
-//             case sUp[0]:
-//                 switch (pX) {
-//                     case sLeft[0] - pWidth:
-//                     case sRight[0]:
-//                         pY -= 1 
-//                         break;
-//                     default:
-//                         pY = pY
-//                         break;
-//                 }
-//                 break;
-//             case sUp[1]:
-//                 switch (pX) {
-//                     case sLeft[1] - pWidth:
-//                         case sRight[1]:
-//                         pY -= 1 
-//                         break;
-//                     default:
-//                         pY = pY
-//                         break;
-//                 }
-//                 break;
-//             default:
-//                 pY -= 1
-//                 break;
-//         }
-//         player.style.bottom = `${pY}px`
-//     }
-//     setInterval(pDownMove, 1)
+    function pDownMove() {
+        switch (pDown) {
+            case `fall`:
+                pY -= 1
+                break;
+            default:
+                pY = pY
+                break;
+        }
+        switch (pY) {
+            case aY - pWidth:
+                pY = innerHeight
+                break;
+            default:
+                sI.forEach(function(i) {
+                    switch (pY) {
+                        case sUp[sUp.length - 1]:
+                            switch (true) {
+                                case pX < sRight[sRight.length - 1] && pX + pWidth >= sLeft[sLeft.length - 1]:
+                                    pDown = null
+                                    pY = pY - 1
+                                    complete()
+                                    c = 1
+                                    break;
+                            }
+                            break;
+                        case sUp[i]:
+                            switch (true) {
+                                case pX < sRight[i] && pX + pWidth >= sLeft[i]:
+                                    pDown = null
+                                    break;
+                                default:
+                                    pDown = `fall`
+                                    break;
+                            }
+                            break;
+                    }
+                })
+                break;
+        }
+        player.style.bottom = `${pY}px`
+    }
+    setInterval(pDownMove, 1)
     
-//     function pHorizontalMove() {
-//         switch (pMove) {
-//             case `right`:
-//                 switch (pX + pWidth) {
-//                     case aX + aWidth:
-//                         pX = pX
-//                         break;
-//                     default:
-//                         pX += 1
-//                         break;
-//                 }
-//                 break;
-//             case `left`:
-//                 switch (pX) {
-//                     case aX:
-//                         pX = pX
-//                         break;
-//                     default:
-//                         pX -= 1
-//                         break;
-//                 }
-//                 break;
-//         }
-//         player.style.left = `${pX}px`
-//     }
-//     setInterval(pHorizontalMove, 1)    
-
-//     document.addEventListener(`keydown`, function(e) {
-//         switch (e.key) {
-//             case `ArrowRight`:
-//                 pMove = `right`
-//                 break;
-//             case `ArrowLeft`:
-//                 pMove = `left`
-//                 break;
-//         }
-//     })
-    
-//     document.addEventListener(`keyup`, function(e) {
-//         switch (e.key) {
-//             case `ArrowRight`:
-//                 pMove = null
-//                 break;
-//             case `ArrowLeft`:
-//                 pMove = null
-//                 break;
-//         }
-//     })
-// }
-// pPosition()
+    function pHorizontalMove() {
+        switch (pMove) {
+            case `right`:
+                switch (pX + pWidth) {
+                    case aX + aWidth:
+                        pX = pX
+                        break;
+                    default:
+                        sI.forEach(function(i) {
+                            switch (true) {
+                                case pX < sRight[i] && pX + pWidth > sLeft[i]:
+                                    switch (true) {
+                                        case pY < sUp[i] && pY + pWidth > sDown[i]:
+                                            pMove = null
+                                            break;
+                                    }
+                                    break;
+                            }
+                        })
+                        pX += 1
+                        break;
+                }
+                break;
+            case `left`:
+                switch (pX) {
+                    case aX:
+                        pX = pX
+                        break;
+                    default:
+                        sI.forEach(function(i) {
+                            switch (true) {
+                                case pX + pWidth >= sLeft[i] && pX <= sRight[i]:
+                                    switch (true) {
+                                        case pY < sUp[i] && pY + pWidth > sDown[i]:
+                                            pMove = null
+                                            break;
+                                    }
+                                    break;
+                            }
+                        })
+                        pX -= 1
+                        break;
+                }
+                break;
+            }
+        player.style.left = `${pX}px`
+    }
+    setInterval(pHorizontalMove, 1)
+}
+pPosition()

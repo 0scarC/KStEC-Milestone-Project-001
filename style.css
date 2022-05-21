@@ -9,20 +9,20 @@ ul {
     padding-inline-start: 0;
 }
 
-/*Pause Menu*/
-.pause div {
+/*Menu*/
+.menu div {
     text-align: center;
     border: 2px solid #fff;
     background-color: #000;
     color: #fff;
 }
 
-.pause a,
-.pause a:visited {
+.menu a,
+.menu a:visited {
     text-decoration: none;
     color: #fff;
 }
 
-.pause a:hover {
+.menu a:hover {
     color: #ff0
 }
