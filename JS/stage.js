@@ -3,15 +3,15 @@ var p = 0
 var sN = 0
 
 //Design and Position
-function design(e, w, h, c, tC, x, y, d, n) {
+function design(e, w, h, c, tC, x, y, n) {
     e.style.width = `${w}px`
     e.style.height = `${h}px`
     e.style.backgroundColor = c
     e.style.color = tC
     e.className = n
     e.style.position = `fixed`
-    e.style.left = Math.floor(x) + d
-    e.style.bottom = Math.floor(y) + d
+    e.style.left = `${x}px`
+    e.style.bottom = `${y}px`
 }
 
 //Text
@@ -31,17 +31,12 @@ const aX = Math.floor(innerWidth/100 * 3)
 const aY = Math.floor(innerHeight/100 * 6)
 
 function stageArea() {
-    design(playArea, aWidth, aHeight, `#fff`, `#858585`, 3, 6, `%`, `playArea`)
-    console.log(Math.floor(innerHeight/100))
-    console.log(aY)
+    design(playArea, aWidth, aHeight, `#fff`, `#858585`, aX, aY, `playArea`)
     document.body.append(playArea)
 }
 
 //Stage Platforms
-var sWidth
-var sHeight
-var sX
-var sY
+var sWidth, sHeight, sX, sY
 
 const sLeft = []
 const sRight = []
@@ -56,7 +51,7 @@ function newPlatform(w, h, c, x, y) {
     sX = Math.floor(x)
     sY = Math.floor(y)
 
-    design(platform, sWidth, sHeight, c, ``, sX, sY, `px`, `platform`)
+    design(platform, sWidth, sHeight, c, ``, sX, sY, `platform`)
 
     sLeft.push(sX)
     sRight.push(sX + sWidth)
@@ -73,7 +68,7 @@ function finalPlatform(w, h, c, x, y) {
     sX = Math.floor(x)
     sY = Math.floor(y)
 
-    design(platform, sWidth, sHeight, c, `#d5ce0a`, sX, sY, `px`, `final`)
+    design(platform, sWidth, sHeight, c, `#d5ce0a`, sX, sY, `final`)
     text(platform, end, `END`, aHeight/20, 0, 0)
 
     sLeft.push(sX)
@@ -84,9 +79,122 @@ function finalPlatform(w, h, c, x, y) {
 }
 
 //Player
-
-var pY = Math.floor(aHeight/1.25)
+var pWidth, pY, pX
+var pDown = `fall`
 var pMove = null
+
+function player() {
+    const player = document.createElement('div')
+    playArea.append(player)
+
+    pWidth = Math.floor(aWidth/20)
+    pY = Math.floor(aHeight/1.25)
+    pX = Math.floor(aWidth/2)
+
+    function pDesign(w, h, c) {
+        player.style.width = w
+        player.style.height = h
+        player.style.backgroundColor = c
+    }    
+    pDesign(`${pWidth}px`, `${pWidth}px`, `#000`)
+
+    function pPosition() {
+        player.style.position = `fixed`
+        player.style.left = `${pX}px`
+        player.style.bottom = `${pY}px`
+        
+        function pDownMove() {
+            switch (pDown) {
+                case `fall`:
+                    pY -= 1
+                    break;
+                default:
+                    pY = pY
+                    break;
+            }
+            switch (pY) {
+                case aY - pWidth:
+                    pY = innerHeight
+                    break;
+                default:
+                    for (var i = 0; i < sUp.length; i++)
+                        switch (pY) {
+                            case sUp[sUp.length - 1]:
+                                switch (true) {
+                                    case pX < sRight[sRight.length - 1] && pX + pWidth >= sLeft[sLeft.length - 1]:
+                                        pDown = null
+                                        pY = pY - 1
+                                        complete()
+                                        c = 1
+                                        break;
+                                }
+                                break;
+                            case sUp[i]:
+                                switch (true) {
+                                    case pX < sRight[i] && pX + pWidth >= sLeft[i]:
+                                        pDown = null
+                                        break;
+                                    default:
+                                        pDown = `fall`
+                                        break;
+                                }
+                                break;
+                        }
+                    break;
+            }
+            player.style.bottom = `${pY}px`
+        }
+        setInterval(pDownMove, 1)
+        
+        function pHorizontalMove() {
+            switch (pMove) {
+                case `right`:
+                    switch (pX + pWidth) {
+                        case aX + aWidth:
+                            pX = pX
+                            break;
+                        default:
+                            for (var i = 0; i < sUp.length; i++)
+                            switch (true) {
+                                case pX < sRight[i] && pX + pWidth > sLeft[i]:
+                                    switch (true) {
+                                        case pY < sUp[i] && pY + pWidth > sDown[i]:
+                                            pMove = null
+                                            break;
+                                    }
+                                    break;
+                            }
+                            pX += 1
+                            break;
+                    }
+                    break;
+                case `left`:
+                    switch (pX) {
+                        case aX:
+                            pX = pX
+                            break;
+                        default:
+                            for (var i = 0; i < sUp.length; i++)
+                            switch (true) {
+                                case pX + pWidth >= sLeft[i] && pX <= sRight[i]:
+                                    switch (true) {
+                                        case pY < sUp[i] && pY + pWidth > sDown[i]:
+                                            pMove = null
+                                            break;
+                                    }
+                                    break;
+                            }
+                            pX -= 1
+                            break;
+                    }
+                    break;
+                }
+            player.style.left = `${pX}px`
+        }
+        setInterval(pHorizontalMove, 1)
+    }
+    pPosition()
+}
 
 //Menus
 var cArea = document.createElement(`div`)
@@ -102,9 +210,9 @@ var pauseB1 = document.createElement(`form`)
 var pID
 
 function menu(e, c, m, title, t1, mH, bBox, b) {
-    design(e, aWidth, aHeight, c, ``, aX, aY, `px`, `menu`)
+    design(e, aWidth, aHeight, c, ``, aX, aY, `menu`)
     
-    design(m, aWidth/2, aHeight/2, `#000`, `#fff`, aWidth/3.84, aHeight/3, `px`)
+    design(m, aWidth/2, aHeight/2, `#000`, `#fff`, aWidth/3.84, aHeight/3)
     text(m, title, t1, aHeight/20, mH, 0)
     text(m, bBox, `<p tabindex="0" ` + b + `</p><p tabindex="0" id="retry">Retry</p><p tabindex="0" id="ss">Stage Selection</p><p tabindex="0" id="mm">Main Menu</p>`, aHeight/30, 0, 0)
 
@@ -152,6 +260,7 @@ function stage(s) {
             sText.style.left = `${aWidth/4.3}px`
             newPlatform(aWidth/1.25, aHeight/15, `#162e77`, aX, aY + 1)
             finalPlatform(aWidth/6, aHeight/15, `#167735`, aWidth/1.17 , aY)
+            player()
             break;
         case 2:
             sN = 2
@@ -164,6 +273,7 @@ function stage(s) {
             newPlatform(aWidth/1.25, aHeight/5, `#162e77`, aWidth/4.5, aHeight/2.5)
             newPlatform(aWidth/1.25, aHeight/5, `#162e77`, aX, aHeight/10)
             finalPlatform(aWidth/6, aHeight/15, `#167735`, aWidth/6 * 5.05, aY)
+            player()
             break;
         case 3:
             sN = 3
@@ -174,23 +284,20 @@ function stage(s) {
             sText.style.left = `${aWidth/3.3}px`
             newPlatform(aWidth/6, aHeight/15, `#162e77`, aX, aHeight/10)
             finalPlatform(aWidth/6, aHeight/15, `#167735`, aWidth/1.17, aHeight/1.25)
+            player()
             break;
         case 4:
             sN = 4
             clearStage()
             stageArea()
-            text(playArea, sText, `Become a master of controlled descent`, aHeight/25, aHeight/2.5)
+            text(playArea, sText, `Become a master of controlled descent<br>Press 'P' to retry`, aHeight/25, aHeight/2.5)
             sText.style.position = `fixed`
             sText.style.left = `${aWidth/3.3}px`
-            newPlatform(aWidth/2, aHeight/15, `#162e77`, aWidth/3.5, aHeight/1.25)
-            newPlatform(aWidth/1.1, aHeight/15, `#162e77`, aWidth/8.2, aY)
+            newPlatform(aWidth/2, aHeight/15, `#162e77`, aWidth/3.75, aHeight/1.25)
+            newPlatform(aWidth, aHeight/15, `#162e77`, aX, aY)
             finalPlatform(aWidth/6, aHeight/15, `#167735`, aWidth/2.27, aHeight/4)
-            break;
-        case 5:
-            break;
-        case 6:
+            player()
             break;
     }
 }
-
 stage(1)

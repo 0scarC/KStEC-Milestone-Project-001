@@ -60,15 +60,23 @@ document.addEventListener(`keyup`, function(e) {
 })
 
 //Pause and Complete Menu
+function redo() {
+    pDown = `fall`
+    p = 0
+}
+
+function pauseContinue() {
+    redo()
+    pY += 1
+}
+
 document.addEventListener(`keydown`, function(e) {
     switch (e.code) {
         case `KeyP`:
             switch (p) {
                 case 1:
-                    pDown = `fall`
-                    pY += 1
+                    pauseContinue()
                     pauseArea.remove()
-                    p = 0
                     break;
                 default:
                     pDown = null
@@ -91,10 +99,8 @@ document.addEventListener(`keydown`, function(e) {
                         case pID[3]:
                             switch (pID[3].id) {
                                 case `continue`:
-                                    pDown = `fall`
-                                    pY += 1
+                                    pauseContinue()
                                     pauseArea.remove()
-                                    p = 0
                                     break;
                                 case `next`:
                                     clearStage()
@@ -105,6 +111,14 @@ document.addEventListener(`keydown`, function(e) {
                                     break;
                             }
                             break;
+                        case pID[4]:
+                            redo()
+                            stage(1)
+                            break;
+                        case pID[5]:
+                            break;
+                        case pID[6]:
+                            break;
                     }
                     break;
             }
@@ -112,10 +126,8 @@ document.addEventListener(`keydown`, function(e) {
                 case pID[3]:
                     switch (pID[1].id) {
                         case `continue`:
-                            pDown = `fall`
-                            pY += 1
+                            pauseContinue()
                             pauseArea.remove()
-                            p = 0
                             break;
                         case `next`:
                             clearStage()
@@ -143,10 +155,8 @@ function click(e, eA) {
     document.getElementById(e).addEventListener(`click`, function() {
         switch (e) {
             case `continue`:
-                pDown = `fall`
-                pY += 1
+                pauseContinue()
                 eA.remove()
-                p = 0
                 break;
             case `next`:
                 clearStage()
