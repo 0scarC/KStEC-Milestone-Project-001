@@ -1,27 +1,15 @@
 
-p {
-    margin-block-start: 0;
-    margin-block-end: 0;
-}
-
 /*Stage*/
 .playArea p {
     text-align: center;
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 /*Menu*/
 .menu div {
     text-align: center;
     border: 2px solid #fff;
-}
-
-.menu a,
-.menu a:visited {
-    text-decoration: none;
-    text-align: center;
-    border: none;
-    color: #fff;
-    background-color: #000;
 }
 
 .menu p:hover,

@@ -2,6 +2,7 @@
 var l = 0
 var m = 0
 var r = 0
+var z = 0
 
 //Player Movement
 document.addEventListener(`keydown`, function(e) {
@@ -58,8 +59,7 @@ document.addEventListener(`keyup`, function(e) {
     }
 })
 
-//Pause Menu
-
+//Pause and Complete Menu
 document.addEventListener(`keydown`, function(e) {
     switch (e.code) {
         case `KeyP`:
@@ -84,22 +84,32 @@ document.addEventListener(`keydown`, function(e) {
             }
             break;
         case `Enter`:
-            switch (pID[s]) {
+            for (z; z < pID.length; z++)
+            switch (pID[z]) {
                 case pID[2]:
-                    pDown = `fall`
-                    pY += 1
-                    pauseArea.remove()
-                    p = 0
-                    break;
-                case pID[3]:
-                    switch (s) {
-                        case 1:
-                            stage(1)
+                    switch (pID[1].id) {
+                        case `continue`:
+                            pauseArea.remove()
+                            pDown = `fall`
+                            pY += 1
+                            p = 0
                             break;
-                        case 2:
-                            stage(2)
+                        case `next`:
+                            clearStage()
+                            console.log(sN)
+                            stage(sN + 1)
+                            pDown = `fall`
+                            c = 0   
                             break;
                     }
+                    break;
+                case pID[3]:
+                        pauseArea.remove()
+                        cArea.remove()
+                        clearStage()
+                        stage(sN)
+                        p = 0
+                        c = 0
                     break;
             }
             break;
@@ -118,7 +128,7 @@ function click(e, eA) {
             case `next`:
                 eA.remove()
                 clearStage()
-                stage(sN+1)
+                stage(sN + 1)
                 pDown = `fall`
                 c = 0
                 break;

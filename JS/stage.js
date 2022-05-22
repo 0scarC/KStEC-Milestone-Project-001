@@ -1,8 +1,6 @@
 var c = 0
 var p = 0
-var i = 0
 var sN = 0
-const body = document.querySelector(`body`)
 
 //Design and Position
 function design(e, w, h, c, tC, x, y, n) {
@@ -27,7 +25,6 @@ function text(m, e, t, s, mT, mB) {
 
 //Stage Play Area
 const playArea = document.createElement(`div`)
-
 const aWidth = Math.floor(innerWidth/1.02)
 const aHeight = Math.floor(innerHeight/1.02)
 const aX = Math.floor(innerWidth/95)
@@ -40,7 +37,6 @@ var sT4 = document.createElement(`p`)
 
 function stageArea() {
     design(playArea, aWidth, aHeight, `#fff`, `#858585`, aX, aY, `playArea`)
-    playArea.remove()
     document.body.append(playArea)
 }
 
@@ -58,31 +54,17 @@ const sI = []
 
 function newPlatform(w, h, c, x, y) {
     const platform = document.createElement(`div`)
+    sWidth = Math.floor(w)
+    sHeight = Math.floor(h)
+    sX = Math.floor(x)
+    sY = Math.floor(y)
 
-    function sDesign() {
-        sWidth = Math.floor(w)
-        sHeight = Math.floor(h)
-        platform.style.width = `${sWidth}px`
-        platform.style.height = `${sHeight}px`
-        platform.style.backgroundColor = c
-    }
-    sDesign()
-    
-    function sPosition() {
-        sX = Math.floor(x)
-        sY = Math.floor(y)
-        platform.style.position = `fixed`
-        platform.style.left = `${sX}px`
-        platform.style.bottom = `${sY}px`
-    }
-    sPosition()
-    
+    design(platform, sWidth, sHeight, c, `#000`, sX, sY, `platform`)
+
     sLeft.push(sX)
     sRight.push(sX + sWidth)
     sUp.push(sY + sHeight)
     sDown.push(sY)
-    sI.push(i)
-    i++
     playArea.append(platform)
 }
 
@@ -109,7 +91,7 @@ function menu(e, c, m, title, t1, mH, bBox, b) {
     
     design(m, aWidth/2, aHeight/2, `#000`, `#fff`, aWidth/3.84, aHeight/3)
     text(m, title, t1, aHeight/20, mH, 0)
-    text(m, bBox, b, aHeight/30, 0, 0)
+    text(m, bBox, `<p tabindex="0" ` + b + `</p><p tabindex="0" id="retry">Retry</p><p tabindex="0" id="ss">Stage Selection</p><p tabindex="0" id="mm">Main Menu</p>`, aHeight/30, 0, 0)
 
     m.append(bBox)
     e.append(m)
@@ -117,21 +99,23 @@ function menu(e, c, m, title, t1, mH, bBox, b) {
 }
 
 function complete() {
-    menu(cArea, `#ff06`, cMenu, cTitle, `<strong>STAGE<br>COMPLETE</strong>`, aHeight/30, cB1, `<br><p tabindex="0" id="next" >Next Stage</p><br><p tabindex="0" id="retry">Retry</p><br><p tabindex="0" id="ss">Stage Selection</p><br><p tabindex="0" id="mm">Main Menu</p>`)
-    click(`next`,  cArea)
-    click(`retry`,  cArea)
-    click(`ss`,  cArea)
-    click(`mm`,  cArea)
+    menu(cArea, `#ff06`, cMenu, cTitle, `<strong>STAGE<br>COMPLETE</strong>`, aHeight/30, cB1, `id="next">Next Stage`)
+    click(`next`, cArea)
+    click(`retry`, cArea)
+    click(`ss`, cArea)
+    click(`mm`, cArea)
     pID = document.getElementsByTagName(`p`)
+    console.log(pID)
 }
 
 function pause() {  
-    menu(pauseArea, `#0006`, pauseMenu, pauseTitle, `<br><strong>PAUSED</strong>`, aHeight/30, pauseB1, `<br><p tabindex="0" id="continue">Continue</p><br><p tabindex="0" id="retry">Retry</p><br><p tabindex="0" id="ss">Stage Selection</p><br><p tabindex="0" id="mm">Main Menu</p>`)
-    click(`continue`,  pauseArea)
-    click(`retry`,  pauseArea)
-    click(`ss`,  pauseArea)
-    click(`mm`,  pauseArea)
+    menu(pauseArea, `#0006`, pauseMenu, pauseTitle, `<br><strong>PAUSED</strong>`, aHeight/30, pauseB1, `id="continue">Continue`)
+    click(`continue`, pauseArea)
+    click(`retry`, pauseArea)
+    click(`ss`, pauseArea)
+    click(`mm`, pauseArea)
     pID = document.getElementsByTagName(`p`)
+    console.log(pID)
 }
 
 //Stages
@@ -148,8 +132,8 @@ function stage(s) {
             clearStage()
             stageArea()
             text(playArea, sT1, `<p>Move with the left (<--) and right (-->) arrow keys</p>`, aHeight/25, aHeight/2.5)
-            newPlatform(aWidth/1.25, aHeight/15, `#000`, aX, aHeight/25 + 1)
-            newPlatform(aWidth/6, aHeight/15, `#f0f`, aWidth/6 * 5.05 , aHeight/25)
+            newPlatform(aWidth/1.25, aHeight/15, `#162e77`, aX, aHeight/25 + 1)
+            newPlatform(aWidth/6, aHeight/15, `#167735`, aWidth/6 * 5.05 , aHeight/25)
             break;
         case 2:
             sN = 2

@@ -2,8 +2,6 @@ var player = document.createElement('div')
 
 var pWidth = Math.floor(aWidth/20)
 var pX = Math.floor(aWidth/2)
-var pY = Math.floor(aHeight/1.25)
-var pMove = null
 var pDown = `fall`
 
 function pDesign(w, h, c) {
@@ -33,7 +31,7 @@ function pPosition() {
                 pY = innerHeight
                 break;
             default:
-                sI.forEach(function(i) {
+                for (var i = 0; i < sUp.length; i++)
                     switch (pY) {
                         case sUp[sUp.length - 1]:
                             switch (true) {
@@ -56,7 +54,6 @@ function pPosition() {
                             }
                             break;
                     }
-                })
                 break;
         }
         player.style.bottom = `${pY}px`
@@ -71,17 +68,16 @@ function pPosition() {
                         pX = pX
                         break;
                     default:
-                        sI.forEach(function(i) {
-                            switch (true) {
-                                case pX < sRight[i] && pX + pWidth > sLeft[i]:
-                                    switch (true) {
-                                        case pY < sUp[i] && pY + pWidth > sDown[i]:
-                                            pMove = null
-                                            break;
-                                    }
-                                    break;
-                            }
-                        })
+                        for (var i = 0; i < sUp.length; i++)
+                        switch (true) {
+                            case pX < sRight[i] && pX + pWidth > sLeft[i]:
+                                switch (true) {
+                                    case pY < sUp[i] && pY + pWidth > sDown[i]:
+                                        pMove = null
+                                        break;
+                                }
+                                break;
+                        }
                         pX += 1
                         break;
                 }
@@ -92,17 +88,16 @@ function pPosition() {
                         pX = pX
                         break;
                     default:
-                        sI.forEach(function(i) {
-                            switch (true) {
-                                case pX + pWidth >= sLeft[i] && pX <= sRight[i]:
-                                    switch (true) {
-                                        case pY < sUp[i] && pY + pWidth > sDown[i]:
-                                            pMove = null
-                                            break;
-                                    }
-                                    break;
-                            }
-                        })
+                        for (var i = 0; i < sUp.length; i++)
+                        switch (true) {
+                            case pX + pWidth >= sLeft[i] && pX <= sRight[i]:
+                                switch (true) {
+                                    case pY < sUp[i] && pY + pWidth > sDown[i]:
+                                        pMove = null
+                                        break;
+                                }
+                                break;
+                        }
                         pX -= 1
                         break;
                 }
