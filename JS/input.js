@@ -83,5 +83,54 @@ document.addEventListener(`keydown`, function(e) {
                     break;
             }
             break;
+        case `Enter`:
+            switch (pID[i]) {
+                case pID[2]:
+                    pDown = `fall`
+                    pY += 1
+                    pauseArea.remove()
+                    p = 0
+                    break;
+                case pID[3]:
+                    switch (s) {
+                        case 1:
+                            stage01()
+                            break;
+                        case 2:
+                            stage02()
+                            break;
+                    }
+                    break;
+            }
+            break;
     }
 })
+
+function click(e, eA) {
+    document.getElementById(e).addEventListener(`click`, function() {
+        switch (e) {
+            case `continue`:
+                eA.remove()
+                pDown = `fall`
+                pY += 1
+                p = 0
+                break;
+            case `retry`:
+                switch (s) {
+                    case 1:
+                        stage01()
+                        pDown = `fall`
+                        p = 0
+                        break;
+                    case 2:
+                        stage02()
+                        break;
+                }
+                break;
+            case `ss`:
+                break;
+            case `mm`:
+                break;
+        }
+    })
+}

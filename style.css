@@ -1,7 +1,7 @@
 
-ul {
-    list-style: none;
-    padding-inline-start: 0;
+p {
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 /*Stage*/
@@ -18,9 +18,14 @@ ul {
 .menu a,
 .menu a:visited {
     text-decoration: none;
+    text-align: center;
+    border: none;
     color: #fff;
+    background-color: #000;
 }
 
-.menu a:hover {
-    color: #ff0
+.menu p:hover,
+.menu p:focus {
+    color: #167735;
+    outline: none;
 }
