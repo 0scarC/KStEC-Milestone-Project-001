@@ -121,32 +121,40 @@ document.addEventListener(`keydown`, function(e) {
                             break;
                     }
                     break;
-            }
-            switch (pID[z]) {
-                case pID[3]:
-                    switch (pID[1].id) {
-                        case `continue`:
-                            pauseContinue()
+                case 2:
+                 switch (pID[z]) {
+                    case pID[2]:
+                    console.log(sN)
+                        switch (pID[2].id) {
+                            case `continue`:
+                                pauseContinue()
+                                pauseArea.remove()
+                                break;
+                            case `next`:
+                                clearStage()
+                                console.log(sN)
+                                stage(sN + 1)
+                                pDown = `fall`
+                                c = 0   
+                                break;
+                        }
+                        break;
+                    case pID[4]:
                             pauseArea.remove()
-                            break;
-                        case `next`:
+                            cArea.remove()
                             clearStage()
-                            console.log(sN)
-                            stage(sN + 1)
-                            pDown = `fall`
-                            c = 0   
-                            break;
-                    }
+                            stage(sN)
+                            p = 0
+                            c = 0
+                        break;
+                }
                     break;
-                case pID[4]:
-                        pauseArea.remove()
-                        cArea.remove()
-                        clearStage()
-                        stage(sN)
-                        p = 0
-                        c = 0
+                case 3:
+                    break;
+                case 4:
                     break;
             }
+           
             break;
     }
 })
