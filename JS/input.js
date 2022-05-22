@@ -3,6 +3,7 @@ var l = 0
 var m = 0
 var r = 0
 var z = 0
+var sColor = 0
 
 //Player Movement
 document.addEventListener(`keydown`, function(e) {
@@ -195,3 +196,19 @@ function click(e, eA) {
         }
     })
 }
+
+//Color Scheme
+document.addEventListener(`click`, function(e) {
+    switch (e.key) {
+        case `KeyC`:
+            switch (sColor) {
+                case 1:
+                    
+                    sColor = 0
+                    break;
+                case 0:
+                    break;
+            }
+            break;
+    }
+})

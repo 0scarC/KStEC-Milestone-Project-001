@@ -300,4 +300,6 @@ function stage(s) {
             break;
     }
 }
-stage(1)
+
+var number = document.querySelector(`p`).getAttribute(`value`)
+stage(number)
