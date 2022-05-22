@@ -84,7 +84,7 @@ document.addEventListener(`keydown`, function(e) {
             }
             break;
         case `Enter`:
-            switch (pID[i]) {
+            switch (pID[s]) {
                 case pID[2]:
                     pDown = `fall`
                     pY += 1
@@ -94,10 +94,10 @@ document.addEventListener(`keydown`, function(e) {
                 case pID[3]:
                     switch (s) {
                         case 1:
-                            stage01()
+                            stage(1)
                             break;
                         case 2:
-                            stage02()
+                            stage(2)
                             break;
                     }
                     break;
@@ -115,15 +115,22 @@ function click(e, eA) {
                 pY += 1
                 p = 0
                 break;
+            case `next`:
+                eA.remove()
+                clearStage()
+                stage(sN+1)
+                pDown = `fall`
+                c = 0
+                break;
             case `retry`:
                 switch (s) {
                     case 1:
-                        stage01()
+                        stage(1)
                         pDown = `fall`
                         p = 0
                         break;
                     case 2:
-                        stage02()
+                        stage(2)
                         break;
                 }
                 break;

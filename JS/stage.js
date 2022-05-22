@@ -1,7 +1,7 @@
 var c = 0
 var p = 0
 var i = 0
-var s = 0
+var sN = 0
 const body = document.querySelector(`body`)
 
 //Design and Position
@@ -116,8 +116,6 @@ function menu(e, c, m, title, t1, mH, bBox, b) {
     document.body.append(e)
 }
 
-
-
 function complete() {
     menu(cArea, `#ff06`, cMenu, cTitle, `<strong>STAGE<br>COMPLETE</strong>`, aHeight/30, cB1, `<br><p tabindex="0" id="next" >Next Stage</p><br><p tabindex="0" id="retry">Retry</p><br><p tabindex="0" id="ss">Stage Selection</p><br><p tabindex="0" id="mm">Main Menu</p>`)
     click(`next`,  cArea)
@@ -143,23 +141,26 @@ function clearStage() {
     }
 }
 
-function stage01() {
-    s = 1
-    clearStage()
-    stageArea()
-    text(playArea, sT1, `<p>Move with the left (<--) and right (-->) arrow keys</p>`, aHeight/25, aHeight/2.5)
-    newPlatform(aWidth/1.25, aHeight/15, `#000`, aX, aHeight/25 + 1)
-    newPlatform(aWidth/6, aHeight/15, `#f0f`, aWidth/6 * 5.05 , aHeight/25)
+function stage(s) {
+    switch (s) {
+        case 1:
+            sN = 1
+            clearStage()
+            stageArea()
+            text(playArea, sT1, `<p>Move with the left (<--) and right (-->) arrow keys</p>`, aHeight/25, aHeight/2.5)
+            newPlatform(aWidth/1.25, aHeight/15, `#000`, aX, aHeight/25 + 1)
+            newPlatform(aWidth/6, aHeight/15, `#f0f`, aWidth/6 * 5.05 , aHeight/25)
+            break;
+        case 2:
+            sN = 2
+            clearStage()
+            stageArea()
+            text(playArea, sT2, `Down you go`, aHeight/25)
+            newPlatform(aWidth/3, aHeight/15, `#f00`, aX, aHeight/1.25)
+            newPlatform(aWidth/3, aHeight/15, `#00f`, aWidth/10, aHeight/3+1)
+            newPlatform(aWidth/3, aHeight/15, `#00f`, aWidth/10 * 6, aHeight/3)
+            break;
+    }
 }
 
-function stage02() {
-    s = 2
-    clearStage()
-    stageArea()
-    text(playArea, sT2, `Down you go`, aHeight/25)
-    newPlatform(aWidth/3, aHeight/15, `#f00`, aX, aHeight/1.25)
-    newPlatform(aWidth/3, aHeight/15, `#00f`, aWidth/10, aHeight/3+1)
-    newPlatform(aWidth/3, aHeight/15, `#00f`, aWidth/10 * 6, aHeight/3)
-}
-
-stage01()
+stage(1)
