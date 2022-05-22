@@ -207,6 +207,8 @@ document.addEventListener(`click`, function(e) {
                     sColor = 0
                     break;
                 case 0:
+
+                    sColor = 1
                     break;
             }
             break;

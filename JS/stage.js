@@ -214,7 +214,7 @@ function menu(e, c, m, title, t1, mH, bBox, b) {
     
     design(m, aWidth/2, aHeight/2, `#000`, `#fff`, aWidth/3.84, aHeight/3)
     text(m, title, t1, aHeight/20, mH, 0)
-    text(m, bBox, `<p tabindex="0" ` + b + `</p><p tabindex="0" id="retry">Retry</p><p tabindex="0" id="ss">Stage Selection</p><p tabindex="0" id="mm">Main Menu</p>`, aHeight/30, 0, 0)
+    text(m, bBox, `<p tabindex="0" ` + b + `</p><p tabindex="0" id="retry">Retry</p><a href="../index.html" id="ss">Stage Selection</a><br><br><a href="../index.html" id="mm">Main Menu</a>`, aHeight/30, 0, 0)
 
     m.append(bBox)
     e.append(m)
@@ -300,6 +300,3 @@ function stage(s) {
             break;
     }
 }
-
-var number = document.querySelector(`p`).getAttribute(`value`)
-stage(number)

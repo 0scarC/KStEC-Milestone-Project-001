@@ -1,3 +1,6 @@
+body {
+    background-color: #12896f;
+}
 
 /*Stage*/
 .playArea p {
@@ -14,6 +17,18 @@
 
 .menu p:hover,
 .menu p:focus {
+    color: #167735;
+    outline: none;
+}
+
+.menu a,
+.menu a:visited {
+    text-decoration: none;
+    color: #fff;
+}
+
+.menu a:hover,
+.menu a:focus {
     color: #167735;
     outline: none;
 }
