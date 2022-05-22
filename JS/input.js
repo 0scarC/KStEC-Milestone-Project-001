@@ -85,13 +85,36 @@ document.addEventListener(`keydown`, function(e) {
             break;
         case `Enter`:
             for (z; z < pID.length; z++)
+            switch (sN) {
+                case 1:
+                    switch (pID[z]) {
+                        case pID[3]:
+                            switch (pID[3].id) {
+                                case `continue`:
+                                    pDown = `fall`
+                                    pY += 1
+                                    pauseArea.remove()
+                                    p = 0
+                                    break;
+                                case `next`:
+                                    clearStage()
+                                    console.log(sN)
+                                    stage(sN + 1)
+                                    pDown = `fall`
+                                    c = 0 
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
+            }
             switch (pID[z]) {
-                case pID[2]:
+                case pID[3]:
                     switch (pID[1].id) {
                         case `continue`:
-                            pauseArea.remove()
                             pDown = `fall`
                             pY += 1
+                            pauseArea.remove()
                             p = 0
                             break;
                         case `next`:
@@ -103,7 +126,7 @@ document.addEventListener(`keydown`, function(e) {
                             break;
                     }
                     break;
-                case pID[3]:
+                case pID[4]:
                         pauseArea.remove()
                         cArea.remove()
                         clearStage()
@@ -120,27 +143,30 @@ function click(e, eA) {
     document.getElementById(e).addEventListener(`click`, function() {
         switch (e) {
             case `continue`:
-                eA.remove()
                 pDown = `fall`
                 pY += 1
+                eA.remove()
                 p = 0
                 break;
             case `next`:
-                eA.remove()
                 clearStage()
                 stage(sN + 1)
                 pDown = `fall`
                 c = 0
                 break;
             case `retry`:
-                switch (s) {
+                switch (sN) {
                     case 1:
                         stage(1)
                         pDown = `fall`
                         p = 0
+                        c = 0
                         break;
                     case 2:
                         stage(2)
+                        pDown = `fall`
+                        p = 0
+                        c = 0
                         break;
                 }
                 break;
